@@ -1,3 +1,4 @@
 langage: java
 
-
+https://docs.travis-ci.com/user/languages/java/
+mvn test -B
