@@ -25,14 +25,13 @@ public class Main {
         });
 
         post("/createRDV", (request, response) -> {
-            String name = request.queryParams("name");
-            String adress = request.queryParams("adress");
-            String adressRDV = request.queryParams("adressRDV");
-            String dateRDV = request.queryParams("dateRDV");
+            String name = request.queryParams("name").replace(" ", "+");
+            String adress = request.queryParams("adress").replace(" ", "+");
+            String adressRDV = request.queryParams("adressRDV").replace(" ", "+");
+            String dateRDV = request.queryParams("dateRDV").replace(" ", "+");
             meetings.add(new Meeting(adressRDV, "" + meetings.size() + 1 , dateRDV, name, adress));
             response.status(200);
             response.type("application/json");
-
             String APIresponse = RequestTisseoAPI.getItiniraire(adress, adressRDV, dateRDV);
             return APIresponse;
         });
@@ -50,10 +49,10 @@ public class Main {
         });
 
         post("/joinRDV", (request, response) -> {
-            String name = request.queryParams("name");
-            String adress = request.queryParams("adress");
-            String idRDV = request.queryParams("idRDV");
-            //String moyen = request.queryParams("moyen");
+            String name = request.queryParams("name").replace(" ", "+");
+            String adress = request.queryParams("adress").replace(" ", "+");
+            String idRDV = request.queryParams("idRDV").replace(" ", "+");
+            //String moyen = request.queryParams("moyen").replace(" ", "+");
             response.status(200);
             response.type("application/json");
             Meeting m = meetings.get(Integer.parseInt(idRDV) - 1);
