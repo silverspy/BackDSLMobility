@@ -16,8 +16,6 @@ public class Main {
         // Start embedded server at this port
         port(8080);
 
-        meetings.add(new Meeting("adres1","date1", "RDV1","username","adress"));
-        System.out.println(meetings.toString());
 
         after((Filter) (request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
@@ -29,7 +27,7 @@ public class Main {
             String adress = request.queryParams("adress").replace(" ", "+");
             String adressRDV = request.queryParams("adressRDV").replace(" ", "+");
             String dateRDV = request.queryParams("dateRDV").replace(" ", "+");
-            meetings.add(new Meeting(adressRDV, "" + meetings.size() + 1 , dateRDV, name, adress));
+            meetings.add(new Meeting(adressRDV, dateRDV,"" + meetings.size() + 1 , name, adress));
             response.status(200);
             response.type("application/json");
             String APIresponse = RequestTisseoAPI.getItiniraire(adress, adressRDV, dateRDV);
@@ -57,7 +55,7 @@ public class Main {
             response.type("application/json");
             Meeting m = meetings.get(Integer.parseInt(idRDV) - 1);
             m.addUser(name,adress);
-            String APIresponse = RequestTisseoAPI.getItiniraire(adress,m.adress, m.adress);
+            String APIresponse = RequestTisseoAPI.getItiniraire(adress,m.adress, m.date);
             return APIresponse;
         });
 
