@@ -7,7 +7,7 @@ import java.net.URL;
 
 public class RequestTisseoAPI {
 
-    public static String requestTisseo(String service, String request) {
+    private static String requestTisseo(String service, String request) {
         String key = "74f87071-9002-4103-82db-57f70e19e2d2";
         String targetURL = "https://api.tisseo.fr/v1/";
         String urlParameters = targetURL + service +

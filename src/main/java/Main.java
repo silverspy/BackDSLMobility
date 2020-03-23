@@ -22,6 +22,17 @@ public class Main {
             response.header("Access-Control-Allow-Methods", "GET");
         });
 
+        /*
+        /createRDV + data {
+
+            name : nom_user
+            adress: adress_user
+            dateRDV:
+            adressRDV:
+            api : google / tisseo
+
+        } => creer le rdv et renvoie les instructions
+         */
         post("/createRDV", (request, response) -> {
             String name = request.queryParams("name").replace(" ", "+");
             String adress = request.queryParams("adress").replace(" ", "+");
@@ -34,6 +45,9 @@ public class Main {
             return APIresponse;
         });
 
+        /*
+        /listRDV  => donne la liste des rdv
+         */
         post("/listRDV", (request, response) -> {
             response.status(200);
             response.type("application/json");
@@ -46,6 +60,14 @@ public class Main {
             return Jsonlist;
         });
 
+        /*
+        /joinRDV  + data{
+        name:
+        adress:
+        idRDV:
+        api: google / tisseo
+        } => renvoie le rendez vous et ajoute a la liste des participants
+         */
         post("/joinRDV", (request, response) -> {
             String name = request.queryParams("name").replace(" ", "+");
             String adress = request.queryParams("adress").replace(" ", "+");
@@ -59,6 +81,14 @@ public class Main {
             return APIresponse;
         });
 
+        /*
+        /test => return success
+         */
+        post("/test", (request, response) -> {
+            response.status(200);
+            response.type("application/json");
+            return "ok";
+        });
     }
 
 }
