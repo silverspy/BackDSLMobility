@@ -1,5 +1,3 @@
-import com.google.gson.Gson;
-import jdk.nashorn.internal.parser.JSONParser;
 import spark.Filter;
 
 import java.util.ArrayList;
@@ -84,9 +82,8 @@ public class Main {
         /*
         /test => return success
          */
-        post("/test", (request, response) -> {
+        get("/test", (request, response) -> {
             response.status(200);
-            response.type("application/json");
             return "ok";
         });
     }
