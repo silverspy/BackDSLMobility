@@ -86,6 +86,11 @@ public class Main {
             response.status(200);
             return "ok";
         });
+
+        post("/test", (request, response) -> {
+            response.status(200);
+            return "ok";
+        });
     }
 
 }
