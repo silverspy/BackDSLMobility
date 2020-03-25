@@ -5,7 +5,10 @@ SUDO: FALSE
 node_js:
   - 7
 before_script:
-  - npm install -g gulp-cli
+  - npm install qunit
+  - npm install request
 SCRIPT:
-  -CD
-  -MVN INSTALL
+  - CD back/
+  - MVN INSTALL
+  - CD ../front
+  - qunit  'tests/test_connection_servers.js'
