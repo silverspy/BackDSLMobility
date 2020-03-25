@@ -1,3 +1,11 @@
-language: java
-sudo: false
-script: mvn clean verify
+LANGUAGE:
+  - JAVA
+  - node_js
+SUDO: FALSE
+node_js:
+  - 7
+before_script:
+  - npm install -g gulp-cli
+SCRIPT:
+  -CD
+  -MVN INSTALL

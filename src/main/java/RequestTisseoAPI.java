@@ -64,7 +64,7 @@ public class RequestTisseoAPI {
     }
 
     public static String getItiniraire(String departure, String arrival, String date){
-        return requestTisseo("journeys","departurePlace=" + departure + "&arrivalPlace=" + arrival + "toulouse&firstDepartureDatetime=" + date + "&number=2&displayWording=1&lang=fr");
+        return requestTisseo("journeys","departurePlace=" + departure + "&arrivalPlace=" + arrival + "+toulouse&firstDepartureDatetime=" + date + "&number=2&displayWording=1&lang=fr");
     }
 }
 
