@@ -52,7 +52,11 @@ public class Main {
 
             String Jsonlist = "{\"meetings\": [";
             for (int i = 0; i < meetings.size(); i++){
-                Jsonlist += meetings.get(i).toJson();
+                if(i < meetings.size() - 1) {
+                    Jsonlist += meetings.get(i).toJson() + ",";
+                } else {
+                    Jsonlist += meetings.get(i).toJson();
+                }
             }
             Jsonlist += "]}";
             return Jsonlist;
