@@ -36,11 +36,13 @@ public class Main {
             String adress = request.queryParams("adress").replace(" ", "+");
             String adressRDV = request.queryParams("adressRDV").replace(" ", "+");
             String dateRDV = request.queryParams("dateRDV").replace(" ", "+");
+            String API = request.queryParams("api").replace(" ", "+");
             meetings.add(new Meeting(adressRDV, dateRDV,"" + meetings.size() + 1 , name, adress));
             response.status(200);
             response.type("application/json");
-            String APIresponse = RequestTisseoAPI.getItiniraire(adress, adressRDV, dateRDV);
-            return APIresponse;
+            String APIresponse = RequestAPI.getItiniraire(adress, adressRDV, dateRDV, API);
+            String Response = "{\"APIresponse\":" + APIresponse + "\"APItype\":\"" + API + "\"" + "}";
+            return Response;
         });
 
         /*
@@ -74,13 +76,15 @@ public class Main {
             String name = request.queryParams("name").replace(" ", "+");
             String adress = request.queryParams("adress").replace(" ", "+");
             String idRDV = request.queryParams("idRDV").replace(" ", "+");
+            String API = request.queryParams("api").replace(" ", "+");
             //String moyen = request.queryParams("moyen").replace(" ", "+");
             response.status(200);
             response.type("application/json");
             Meeting m = meetings.get(Integer.parseInt(idRDV) - 1);
             m.addUser(name,adress);
-            String APIresponse = RequestTisseoAPI.getItiniraire(adress,m.adress, m.date);
-            return APIresponse;
+            String APIresponse = RequestAPI.getItiniraire(adress, m.adress, m.date, API);
+            String Response = "{\"APIresponse\":" + APIresponse + "\"APItype\":\"" + API + "\"" + "}";
+            return Response;
         });
 
         /*
