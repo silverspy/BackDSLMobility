@@ -41,7 +41,7 @@ public class Main {
             response.status(200);
             response.type("application/json");
             String APIresponse = RequestAPI.getItiniraire(adress, adressRDV, dateRDV, API);
-            String Response = "{\"APIresponse\":" + APIresponse + "\"APItype\":\"" + API + "\"" + "}";
+            String Response = "{\"APIresponse\":" + APIresponse + ",\"APItype\":\"" + API + "\"" + "}";
             return Response;
         });
 
@@ -83,7 +83,7 @@ public class Main {
             Meeting m = meetings.get(Integer.parseInt(idRDV) - 1);
             m.addUser(name,adress);
             String APIresponse = RequestAPI.getItiniraire(adress, m.adress, m.date, API);
-            String Response = "{\"APIresponse\":" + APIresponse + "\"APItype\":\"" + API + "\"" + "}";
+            String Response = "{\"APIresponse\":" + APIresponse + ",\"APItype\":\"" + API + "\"" + "}";
             return Response;
         });
 
