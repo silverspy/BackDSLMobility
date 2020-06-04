@@ -79,5 +79,9 @@ public class Planning {
         return new StringBuilder(ListJson).deleteCharAt(ListJson.length()-1).toString() + "]}";
     }
 
+    public String getJsonHoraire(){
+        return "{ \"open\" : \"" + hstart + "\", \"close\" : \"" + hend + "\"}";
+    }
+
 
 }

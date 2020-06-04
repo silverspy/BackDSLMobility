@@ -88,13 +88,13 @@ public class Main {
             return Response;
         });
 
-                /*
-        /joinRDVinPlanning  + data{
-        name:
-        adress:
-        idRDV:
-        api: google / tisseo
-        } => renvoie le rendez vous et ajoute a la liste des participants
+        /*
+            /joinRDVinPlanning  + data{
+            name:
+            adress:
+            idRDV:
+            api: google / tisseo
+            } => renvoie le rendez vous et ajoute a la liste des participants
          */
         post("/joinRDVinPlanning", (request, response) -> {
             String name = request.queryParams("name").replace(" ", "+");
@@ -158,10 +158,22 @@ public class Main {
             return planning.JsonListRDV();
         });
 
+        /*
+        /listDispo => liste les horaires disponible
+        */
         post("/listDispo", (request, response) -> {
             response.status(200);
             response.type("application/json");
             return planning.getDispo();
+        });
+
+        /*
+        /getHoraire => Liste des horaire
+        */
+        post("/getHoraire", (request, response) -> {
+            response.status(200);
+            response.type("application/json");
+            return planning.getJsonHoraire();
         });
 
 
