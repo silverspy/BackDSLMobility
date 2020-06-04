@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         ArrayList<Meeting> meetings = new ArrayList<>();
+        Planning planning = new Planning();
 
         // Start embedded server at this port
         port(8080);
@@ -86,6 +87,83 @@ public class Main {
             String Response = "{\"APIresponse\":" + APIresponse + ",\"APItype\":\"" + API + "\"" + "}";
             return Response;
         });
+
+                /*
+        /joinRDVinPlanning  + data{
+        name:
+        adress:
+        idRDV:
+        api: google / tisseo
+        } => renvoie le rendez vous et ajoute a la liste des participants
+         */
+        post("/joinRDVinPlanning", (request, response) -> {
+            String name = request.queryParams("name").replace(" ", "+");
+            String adress = request.queryParams("adress").replace(" ", "+");
+            String idRDV = request.queryParams("idRDV").replace(" ", "+");
+            String API = request.queryParams("api").replace(" ", "+");
+            //String moyen = request.queryParams("moyen").replace(" ", "+");
+            if (planning.joinMeeting(idRDV,name,adress)){
+                System.out.println("je rentre");
+                response.status(200);
+                response.type("application/json");
+                Meeting m = planning.getMeeting(idRDV);
+                String APIresponse = RequestAPI.getItiniraire(adress, m.adress, m.date, API);
+                String Response = "{\"APIresponse\":" + APIresponse + ",\"APItype\":\"" + API + "\"" + "}";
+                return Response;
+            } else {
+                response.status(420);
+                response.type("application/json");
+                return "Meeting full";
+            }
+
+        });
+
+        /*
+        /createRDVinPlanning + data {
+
+            name : nom_user
+            adress: adress_user
+            dateRDV:
+            adressRDV:
+            api : google / tisseo
+
+        } => creer le rdv dans le planning et renvoie les instructions
+        */
+        post("/createRDVinPlanning", (request, response) -> {
+            String name = request.queryParams("name").replace(" ", "+");
+            String adress = request.queryParams("adress").replace(" ", "+");
+            String adressRDV = request.queryParams("adressRDV").replace(" ", "+");
+            String dateRDV = request.queryParams("dateRDV").replace(" ", "+");
+            String API = request.queryParams("api").replace(" ", "+");
+            if(planning.addMeeting(adressRDV, dateRDV, name, adress)) {
+                response.status(200);
+                response.type("application/json");
+                String APIresponse = RequestAPI.getItiniraire(adress, adressRDV, dateRDV, API);
+                String Response = "{\"APIresponse\":" + APIresponse + ",\"APItype\":\"" + API + "\"" + "}";
+                return Response;
+            } else {
+                response.status(420);
+                response.type("application/json");
+                return "Already exist or not in the time slot";
+            }
+
+        });
+
+        /*
+        /listRDVinPlanning => liste les rendez vous du planning
+        */
+        post("/listRDVinPlanning", (request, response) -> {
+            response.status(200);
+            response.type("application/json");
+            return planning.JsonListRDV();
+        });
+
+        post("/listDispo", (request, response) -> {
+            response.status(200);
+            response.type("application/json");
+            return planning.getDispo();
+        });
+
 
         /*
         /test => return success

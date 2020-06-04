@@ -18,7 +18,7 @@ public class Meeting {
     }
 
     public String toJson(){
-        return "{\"adress\": \"" + adress + "\", \"date\": \"" + date + "\", \"id\": \"" + id + "\"}";
+        return "{\"adress\": \"" + adress + "\", \"date\": \"" + date + "\", \"id\": \"" + id + "\", \"nbPeople\": \"" + GuestList.size() + "\"}";
     }
 
     public String getAllGuest() {
@@ -28,6 +28,10 @@ public class Meeting {
         }
         Jsonlist += "]";
         return Jsonlist;
+    }
+
+    public int nbUser(){
+        return GuestList.size();
     }
 
 }
