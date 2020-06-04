@@ -1,8 +1,9 @@
-import javax.naming.Name;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Calendar;
+import java.util.Properties;
 
 public class Planning {
     int hstart;
@@ -12,9 +13,23 @@ public class Planning {
 
 
     public Planning(){
-        hstart = 9;
-        hend = 18;
-        nbPers = 2;
+        try {
+
+            Properties prop = new Properties();
+            InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("Planing.properties");
+            prop.load(in);
+            hstart = Integer.parseInt(prop.getProperty("openAt"));
+            hend = Integer.parseInt(prop.getProperty("closeAt"));
+            nbPers = Integer.parseInt(prop.getProperty("nbPerHour"));
+
+        } catch(Exception e){
+            System.out.println(e);
+            System.out.println("error no Planing.properties default properties loaded (9h to 18h, 2 person)");
+            hstart = 9;
+            hend = 18;
+            nbPers = 2;
+        }
+        System.out.println("Open at : " + hstart + " \nClose at : " + hend + " \nNumber of people per meeting : " + nbPers);
     }
 
     public boolean addMeeting(String rdvAdress, String date, String userName, String userAdress){
