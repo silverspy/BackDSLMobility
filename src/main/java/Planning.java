@@ -36,7 +36,8 @@ public class Planning {
         String day = date.split("\\+")[0];
         int heurerdv  = Integer.parseInt(date.split("\\+")[1].split(":")[0]);
         if(heurerdv > hstart && heurerdv < hend) {
-            if (Listerdv.containsKey(day + "+" + heurerdv)){
+            System.out.println(day + "+" + heurerdv);
+            if (Listerdv.containsKey(day + "+" + heurerdv + ":00")){
                 return false;
             } else {
                 Listerdv.put(date , new Meeting(rdvAdress, date, date, userName, userAdress));

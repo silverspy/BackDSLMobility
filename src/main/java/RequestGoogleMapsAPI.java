@@ -17,7 +17,6 @@ public class RequestGoogleMapsAPI {
             "language=fr&" +
             request +
             "&key=" + key;
-        System.out.println(urlParameters);
 
         try {
             String readLine = null;

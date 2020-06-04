@@ -113,7 +113,7 @@ public class Main {
             } else {
                 response.status(420);
                 response.type("application/json");
-                return "Meeting full";
+                return "Meeting full or inexistant";
             }
 
         });
