@@ -69,7 +69,11 @@ public class Planning {
         for (String name: Listerdv.keySet()){
             ListJson += (Listerdv.get(name).toJson() +",");
         }
-        return new StringBuilder(ListJson).deleteCharAt(ListJson.length()-1).toString() + "]}";
+        if(Listerdv.isEmpty()){
+            return ListJson + "]}";
+        } else {
+            return new StringBuilder(ListJson).deleteCharAt(ListJson.length()-1).toString() + "]}";
+        }
     }
 
     public String getDispo(){
