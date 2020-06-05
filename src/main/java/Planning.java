@@ -36,7 +36,6 @@ public class Planning {
         String day = date.split("\\+")[0];
         int heurerdv  = Integer.parseInt(date.split("\\+")[1].split(":")[0]);
         if(heurerdv > hstart && heurerdv < hend) {
-            System.out.println(day + "+" + heurerdv);
             if (Listerdv.containsKey(day + "+" + heurerdv + ":00")){
                 return false;
             } else {
@@ -49,7 +48,6 @@ public class Planning {
     }
 
     public boolean joinMeeting(String id, String name, String adress){
-        System.out.println(Listerdv.containsKey(id) + " : " + id);
         if (Listerdv.containsKey(id)){
             if(Listerdv.get(id).nbUser() < nbPers){
                 Listerdv.get(id).addUser(name,adress);
@@ -97,6 +95,18 @@ public class Planning {
 
     public String getJsonHoraire(){
         return "{ \"open\" : \"" + hstart + "\", \"close\" : \"" + hend + "\"}";
+    }
+
+
+    public String JsonListHoraireRDV(){
+        String ListJson = "{\"horaire\": [";
+        for (String name: Listerdv.keySet()){
+            if(Listerdv.get(name).nbUser() < nbPers){
+                ListJson += ("\"" + name + "\",");
+            }
+        }
+        System.out.println(ListJson);
+        return new StringBuilder(ListJson).deleteCharAt(ListJson.length()-1).toString() + "]}";
     }
 
 

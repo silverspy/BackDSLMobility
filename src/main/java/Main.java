@@ -176,6 +176,15 @@ public class Main {
             return planning.getJsonHoraire();
         });
 
+        /*
+            /getHoraireRDV => Liste les horarire des RDV disponible
+        */
+        post("/getHoraireRDV", (request, response) -> {
+            response.status(200);
+            response.type("application/json");
+            return planning.JsonListHoraireRDV();
+        });
+
 
         /*
         /test => return success
