@@ -105,8 +105,11 @@ public class Planning {
                 ListJson += ("\"" + name + "\",");
             }
         }
-        System.out.println(ListJson);
-        return new StringBuilder(ListJson).deleteCharAt(ListJson.length()-1).toString() + "]}";
+        if(Listerdv.isEmpty()){
+            return ListJson + "]}";
+        } else {
+            return new StringBuilder(ListJson).deleteCharAt(ListJson.length()-1).toString() + "]}";
+        }
     }
 
 
